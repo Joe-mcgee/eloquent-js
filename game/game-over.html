@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="css/game.css">
+
+<body>
+<script>
+  // The old runGame function. Modify it...
+  function runGame(plans, Display) {
+    var lives = 3;
+    function startLevel(n) {
+      while (lives) {
+      runLevel(new Level(plans[n]), Display, function(status) {
+        if (status == "lost") {
+          lives--;
+          startLevel(n);
+        }
+        else if (n < plans.length - 1)
+          startLevel(n + 1);
+        else
+          console.log("You win!");
+      });
+    }
+  }
+    startLevel(0);
+  }
+  runGame(GAME_LEVELS, DOMDisplay);
+</script>
+</body>

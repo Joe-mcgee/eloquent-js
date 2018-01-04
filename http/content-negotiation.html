@@ -1,0 +1,49 @@
+<script>
+
+var types = [
+'text/plain',
+'text/html',
+'application/json',
+'application/rainbows+unicorns']
+
+function authorRequest(type) {
+var req = new XMLHttpRequest();
+req.open("GET", 'http://eloquentjavascript.net/author', false);
+req.setRequestHeader("accept", "text/plain");
+req.send(null);
+return req.responseText
+}
+
+for (var i = 0; i < types.length; i++) {
+  type = types[i];
+  try {
+  text = authorRequest(type)
+  console.log(text);
+} catch(e) { console.log('error' + e)}
+}
+
+var types = [
+'text/plain',
+'text/html',
+'application/json',
+'application/rainbows+unicorns']
+
+function authorRequest(type) {
+var req = new XMLHttpRequest();
+req.open("GET", 'http://eloquentjavascript.net/author', false);
+req.setRequestHeader("accept", "text/plain");
+req.send(null);
+return req.responseText
+}
+
+for (var i = 0; i < types.length; i++) {
+  type = types[i];
+  try {
+  text = authorRequest(type)
+  console.log(text);
+} catch(e) { console.log('error' + e)}
+}
+
+
+
+</script>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <script>
+      // make a simple request
+      // create request object
+      var req = new XMLHttpRequest();
+      req.open("GET", "example/data.txt");
+      req.send(null);
+      console.log(req.status, req.statusText);
+      console.log(req.getResponseHeader('content-type'));
+
+      //comminicating with JSON
+      console.log(JSON.parse(req.responseText));
+      // -> return a dict object
+
+      //http sandboxing can be circumvented server side with
+      // Access-Control-Allow-Origin
+      // abrstracting requests
+      function backgroundReadFile(url, callback) {
+        var req = new XMLHttpRequest():
+        req.open('GET', url, true);
+        req.addEventListener("load", function() {
+          if (req.status < 400) {
+            callback(req.responseText);
+          }
+        });
+        req.send(null);
+      }
+
+    </script>
+  </body>
+</html>

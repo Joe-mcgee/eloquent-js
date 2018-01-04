@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+
+  </head>
+  <body>
+  <!-- form focus -->
+  <input type='text' autofocus>
+  <script>
+    document.querySelector('input').focus();
+    console.log(document.activeElement.tagName);
+    // -> input
+    document.querySelector('input').blur();
+    console.log(document.activeElement.tagName);
+    // -> BODY
+    //
+  </script>
+  <!-- moving focus by tab key can be influenced with tabindex attibute -->
+  <input type='text' tabindex=1><a href='.'>(help)</a>
+  <button onclick="console.log('ok')" tabindex=2>OK</button>
+
+  <!-- disabled fields -->
+  <button>I'm all right</button>
+  <button disabled>I'm out</button>
+
+  <!-- The form as a whole -->
+
+  <form action='example/submit.html'>
+    Name: <input type='text' name='name'><br>
+    Password: <input type='Password' name='password'><br>
+    <button type='submit'>Log in</button>
+  </form>
+  <script>
+  var form = document.querySelector('form');
+  console.log(form.elements[1].type)
+  //password
+  console.log(form.elements.password.type)
+  // password
+  console.log(form.elements.name.form == form);
+  //true
+  </script>
+  <!-- Storing data client side -->
+  <!-- data can survice page reloads by using the localstorage object -->
+  <script>
+  localStorage.setItem('username', 'tbhulsma');
+  console.log(localStorage.getItem('username'));
+  localStorage.removeItem('username')
+  </script>
+
+  Notes: <select id='list'></select>
+  <button onclick='addNote()'>new</button><br>
+  <textarea id='currentnote' style='width: 100%; height:10em'></textarea>
+
+  <script>
+  var list = document.querySelector('#list');
+  function addToList(name) {
+    var option = document.createElement('option');
+    option.textcontent = name;
+    list.appendChild(option)
+  }
+
+  //initialize list from local Storage
+  var notes = JSON.parse(localStorage.getItem('notes')) ||
+              {"shopping list": ""};
+
+  for (var name in notes) {
+    if (notes.hasOwnProperty(name)) {
+      addToList(name);
+    }
+  }
+
+  function saveToStorage() {
+    localStorage.setItem('notes', JSON.stringify(notes))
+  }
+
+  var current = document.querySelector('#currentnote');
+  current.value = notes[list.value];
+
+  list.addEventListener('change', function() {
+    current.value = notes[list.value];
+  })
+
+  current.addEventListener('change', function() {
+    notes[list.value] = current.value;
+    saveToStorage();
+  });
+
+  function addNote() {
+    var name = prompt('Note Name', '');
+    if (!name) return;
+    if (!notes.hasOwnProperty(name)) {
+      notes[name] = '';
+      addToList(name);
+      saveToStorage()
+    }
+    list.value = name;
+    current.value = notes[name]
+  }
+  </script>
+
+
+
+
+  </body>
+</html>

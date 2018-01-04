@@ -1,0 +1,49 @@
+<!doctype html>
+
+<div id="wrapper">
+  <div data-tabname="one">Tab one</div>
+  <div data-tabname="two">Tab two</div>
+  <div data-tabname="three">Tab three</div>
+</div>
+<script>
+  function asTabs(node) {
+    var divArray = [];
+
+    var children = node.childNodes;
+    for (var i = 0; i < children.length; i++) {
+      if (children[i].nodeType == document.ELEMENT_NODE) {
+        divArray.push(children[i]);
+      }
+    }
+
+    divArray.forEach(function(div, i) {
+      var button = document.createElement('BUTTON');
+      var t = document.createTextNode(divArray[i].innerHTML);
+      button.appendChild(t);
+      node.appendChild(button);
+      node.insertBefore(button, node.firstChild);
+      button.addEventListener('click', function() {
+        divArray.forEach(function (div, j) {
+          if (i == j) {
+            div.style.display = '';
+
+          } else {
+            div.style.display = 'none'
+          }
+        })
+
+      })
+
+
+
+    });
+  }
+
+    // get children of node
+
+    // filter out white space ones
+    // create buttons for data-tabnames
+    // create onclick event for button to display children of data-tabnames
+  asTabs(document.querySelector("#wrapper"));
+
+</script>

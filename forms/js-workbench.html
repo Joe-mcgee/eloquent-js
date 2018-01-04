@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <textarea id="code">return "hi";</textarea>
+    <button id="button">Run</button>
+    <pre id="output"></pre>
+
+<script>
+  // grab element
+  var textarea = document.querySelector("#code");
+  var button = document.querySelector('#button');
+  var output = document.querySelector('#output');
+
+
+  button.addEventListener('click', function () {
+    var text = textarea.value;
+    var data = new Function(text)();
+    var outputText = document.createTextNode(JSON.stringify(data))
+    output.appendChild(outputText);
+  })
+
+  // grab text created inside that element when button is pressed
+  // turn text into js
+  // output js output into output
+</script>
+  </body>
+</html>

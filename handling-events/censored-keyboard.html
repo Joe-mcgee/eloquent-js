@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <input type="text">
+    <script>
+       var field = document.querySelector("input");
+       field.addEventListener('keydown', function(event) {
+        if (event.keyCode == 81 || event.keyCode == 87 || event.keyCody == 88) {
+          event.preventDefault();
+        }
+       });
+    </script>
+  </body>
+</html>
