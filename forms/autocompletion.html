@@ -13,6 +13,32 @@
   var terms = [];
   for (var name in window)
     terms.push(name);
+  var textField = document.querySelector('input')
+  var autoField = document.getElementById('suggestions')
+  textField.addEventListener('input', function () {
+    autoField.innerHTML = ''
+    var type = textField.value;
+    var prevType = type.slice(0, -1)
+    console.log(type)
+    console.log(prevType)
+    var check = new RegExp('^'+type)
+    var clearCheck = new RegExp('^'+prevType)
+    var input = []
+    for (var term of terms) {
+      if (term.match(check)) {
+        input.push(term)
+      }
+    }
+    var node = document.createTextNode(input)
+    autoField.appendChild(document.createTextNode(input))
+    for (var choice in input) {
+      if (choice.match(clearCheck)) {
+        var index = input.indexOf(choice)
+        input.splice(index, 1)
+      }
+    }
+
+  })
 
   // Your code here.
 </script>
