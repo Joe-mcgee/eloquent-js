@@ -13,24 +13,30 @@
   var terms = [];
   for (var name in window)
     terms.push(name);
-  var textField = document.querySelector('input')
+  var textField = document.getElementById('field')
   var autoField = document.getElementById('suggestions')
   textField.addEventListener('input', function () {
     autoField.innerHTML = ''
     var type = textField.value;
     var prevType = type.slice(0, -1)
-    console.log(type)
-    console.log(prevType)
     var check = new RegExp('^'+type)
     var clearCheck = new RegExp('^'+prevType)
     var input = []
     for (var term of terms) {
       if (term.match(check)) {
-        input.push(term)
+        input.push(term+'\n')
       }
     }
-    var node = document.createTextNode(input)
-    autoField.appendChild(document.createTextNode(input))
+    for (var choice of input) {
+      var choiceLink = document.createElement('a')
+      choiceLink.addEventListener('click', function() {
+        /*textField.innerHTML=''*/
+        textField.value = this.innerHTML
+      })
+      choiceLink.appendChild(document.createTextNode(choice));
+      autoField.appendChild(choiceLink)
+    }
+
     for (var choice in input) {
       if (choice.match(clearCheck)) {
         var index = input.indexOf(choice)
